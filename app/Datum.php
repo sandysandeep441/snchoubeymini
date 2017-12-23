@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class grain extends Model
+class Datum extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'grains';
+    protected $table = 'data';
 
     /**
     * The database primary key value.
@@ -25,7 +25,7 @@ class grain extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['type_id', 'user_id', 'qty', 'credited', 'polished'];
 
     
 }

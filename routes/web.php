@@ -18,15 +18,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::resource('grain', 'grainController');
 
-Route::resource('admin/posts', 'Admin\\PostsController');
-Route::resource('grain_type', 'grain_typeController');
-Route::resource('grain_type', 'grain_typeController');
-Route::resource('grain_type', 'grain_typeController');
-Route::resource('grain_type', 'grain_typeController');
-Route::resource('grain_type', 'grain_typeController');
-Route::resource('grain_type', 'grain_typeController');
-Route::resource('grain', 'grainController');
-Route::resource('grain/customer', 'grain\\customerController');
-Route::resource('customer', 'customerController');
-Route::resource('grain', 'grainController');
+//Route::resource('grain', 'grainController');
+   Route::resource('grain', 'grainController');
+   Route::resource('grain/customer', 'grain\\customerController');
+   Route::resource('customer', 'customerController');
+
+
+//Route::prefix('admin')->group(function () {
+//    Route::get('users', function () {
+//        // Matches The "/admin/users" URL
+//    });
+//    Route::resource('grain', 'grainController');
+//    Route::resource('grain/customer', 'grain\\customerController');
+//    Route::resource('customer', 'customerController');
+//
+//});
+
+
+Route::resource('admin/data', 'Admin\\DataController');

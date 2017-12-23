@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Post;
+use App\Datum;
 use Illuminate\Http\Request;
 
-class PostsController extends Controller
+class DataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,15 +21,17 @@ class PostsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $posts = Post::where('title', 'LIKE', "%$keyword%")
-                ->orWhere('content', 'LIKE', "%$keyword%")
-                ->orWhere('category', 'LIKE', "%$keyword%")
+            $data = Datum::where('type_id', 'LIKE', "%$keyword%")
+                ->orWhere('user_id', 'LIKE', "%$keyword%")
+                ->orWhere('qty', 'LIKE', "%$keyword%")
+                ->orWhere('credited', 'LIKE', "%$keyword%")
+                ->orWhere('polished', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
         } else {
-            $posts = Post::paginate($perPage);
+            $data = Datum::paginate($perPage);
         }
 
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.data.index', compact('data'));
     }
 
     /**
@@ -39,7 +41,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.data.create');
     }
 
     /**
@@ -54,9 +56,9 @@ class PostsController extends Controller
         
         $requestData = $request->all();
         
-        Post::create($requestData);
+        Datum::create($requestData);
 
-        return redirect('admin/posts')->with('flash_message', 'Post added!');
+        return redirect('admin/data')->with('flash_message', 'Datum added!');
     }
 
     /**
@@ -68,9 +70,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $datum = Datum::findOrFail($id);
 
-        return view('admin.posts.show', compact('post'));
+        return view('admin.data.show', compact('datum'));
     }
 
     /**
@@ -82,9 +84,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $datum = Datum::findOrFail($id);
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.data.edit', compact('datum'));
     }
 
     /**
@@ -100,10 +102,10 @@ class PostsController extends Controller
         
         $requestData = $request->all();
         
-        $post = Post::findOrFail($id);
-        $post->update($requestData);
+        $datum = Datum::findOrFail($id);
+        $datum->update($requestData);
 
-        return redirect('admin/posts')->with('flash_message', 'Post updated!');
+        return redirect('admin/data')->with('flash_message', 'Datum updated!');
     }
 
     /**
@@ -115,8 +117,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        Post::destroy($id);
+        Datum::destroy($id);
 
-        return redirect('admin/posts')->with('flash_message', 'Post deleted!');
+        return redirect('admin/data')->with('flash_message', 'Datum deleted!');
     }
 }

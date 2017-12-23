@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\grain;
+use App\Grain;
 use Illuminate\Http\Request;
 
-class grainController extends Controller
+class GrainsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +21,13 @@ class grainController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $grain = grain::where('name', 'LIKE', "%$keyword%")
+            $grains = Grain::where(''name', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
         } else {
-            $grain = grain::paginate($perPage);
+            $grains = Grain::paginate($perPage);
         }
 
-        return view('grain.index', compact('grain'));
+        return view('admin.grains.index', compact('grains'));
     }
 
     /**
@@ -37,7 +37,7 @@ class grainController extends Controller
      */
     public function create()
     {
-        return view('grain.create');
+        return view('admin.grains.create');
     }
 
     /**
@@ -52,9 +52,9 @@ class grainController extends Controller
         
         $requestData = $request->all();
         
-        grain::create($requestData);
+        Grain::create($requestData);
 
-        return redirect('grain')->with('flash_message', 'grain added!');
+        return redirect('admin/grains')->with('flash_message', 'Grain added!');
     }
 
     /**
@@ -66,9 +66,9 @@ class grainController extends Controller
      */
     public function show($id)
     {
-        $grain = grain::findOrFail($id);
+        $grain = Grain::findOrFail($id);
 
-        return view('grain.show', compact('grain'));
+        return view('admin.grains.show', compact('grain'));
     }
 
     /**
@@ -80,9 +80,9 @@ class grainController extends Controller
      */
     public function edit($id)
     {
-        $grain = grain::findOrFail($id);
+        $grain = Grain::findOrFail($id);
 
-        return view('grain.edit', compact('grain'));
+        return view('admin.grains.edit', compact('grain'));
     }
 
     /**
@@ -98,10 +98,10 @@ class grainController extends Controller
         
         $requestData = $request->all();
         
-        $grain = grain::findOrFail($id);
+        $grain = Grain::findOrFail($id);
         $grain->update($requestData);
 
-        return redirect('grain')->with('flash_message', 'grain updated!');
+        return redirect('admin/grains')->with('flash_message', 'Grain updated!');
     }
 
     /**
@@ -113,8 +113,8 @@ class grainController extends Controller
      */
     public function destroy($id)
     {
-        grain::destroy($id);
+        Grain::destroy($id);
 
-        return redirect('grain')->with('flash_message', 'grain deleted!');
+        return redirect('admin/grains')->with('flash_message', 'Grain deleted!');
     }
 }
