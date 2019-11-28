@@ -20,10 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::resource('grain', 'grainController');
 
-//Route::resource('grain', 'grainController');
-   Route::resource('grain', 'grainController');
-   Route::resource('grain/customer', 'grain\\customerController');
-   Route::resource('customer', 'customerController');
+Route::get('/grain', 'GrainController@index')->name('grain');
+  
+// Route::resource('grain', 'Admin/grainsController');
+Route::resource('grain/customer', 'grain\\customerController');
+Route::resource('customer', 'customerController');
 
 
 //Route::prefix('admin')->group(function () {

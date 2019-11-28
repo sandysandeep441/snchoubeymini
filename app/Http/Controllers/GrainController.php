@@ -1,28 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use App\Grain;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
-class GrainsController extends Controller
+class GrainController  extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
-	
-	public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index(Request $request)
     {
-		die('sljdhl');
+		
         $keyword = $request->get('search');
         $perPage = 25;
 
@@ -33,7 +28,7 @@ class GrainsController extends Controller
             $grains = Grain::paginate($perPage);
         }
 
-        return view('admin.grains.index', compact('grains'));
+        return view('admin.data.index', compact('grains'));
     }
 
     /**

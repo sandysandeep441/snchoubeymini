@@ -14,14 +14,14 @@ class CreateDataTable extends Migration
     {
         Schema::create('data', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->string('type_id')->nullable();
-            $table->string('user_id')->nullable();
-            $table->string('qty')->nullable();
+            $table->integer('type_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('qty')->nullable();
             $table->string('credited')->nullable();
             $table->string('polished')->nullable();
-            $table->foreign('type_id')->references('id')->on('grains');
-            $table->foreign('cust_id')->references('id')->on('customers');
+//            $table->foreign('type_id')->references('id')->on('grains');
+//            $table->foreign('cust_id')->references('id')->on('customers');
+			$table->timestamps();
             });
     }
 

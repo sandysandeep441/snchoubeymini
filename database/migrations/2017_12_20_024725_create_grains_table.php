@@ -1,8 +1,6 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-
 class CreateGrainsTable extends Migration
 {
     /**
@@ -14,11 +12,10 @@ class CreateGrainsTable extends Migration
     {
         Schema::create('grains', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->timestamps();
-            $table->string(''name')->nullable();
-            });
+        });
     }
-
     /**
      * Reverse the migrations.
      *
