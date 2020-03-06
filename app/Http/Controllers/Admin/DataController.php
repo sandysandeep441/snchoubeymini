@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Grain;
 use App\Datum;
 use Illuminate\Http\Request;
 
@@ -17,6 +17,7 @@ class DataController extends Controller
      */
     public function index(Request $request)
     {
+		
         $keyword = $request->get('search');
         $perPage = 25;
 
@@ -28,10 +29,10 @@ class DataController extends Controller
                 ->orWhere('polished', 'LIKE', "%$keyword%")
                 ->paginate($perPage);
         } else {
-            $data = Datum::paginate($perPage);
+            $grains = Datum::paginate($perPage);
         }
 
-        return view('admin.data.index', compact('data'));
+        return view('admin.data.index', compact('grains'));
     }
 
     /**
@@ -41,7 +42,9 @@ class DataController extends Controller
      */
     public function create()
     {
-        return view('admin.data.create');
+		$grainsType = Grain::pluck('name','id');
+		$customer = \App\customer::pluck('name','id');
+        return view('admin.data.create', compact('grainsType','customer'));
     }
 
     /**
@@ -85,8 +88,10 @@ class DataController extends Controller
     public function edit($id)
     {
         $datum = Datum::findOrFail($id);
-
-        return view('admin.data.edit', compact('datum'));
+		$grainsType = Grain::pluck('name','id');
+		$customer = \App\customer::pluck('name','id');
+        return view('admin.data.edit', compact('grainsType','customer','datum'));
+    
     }
 
     /**
@@ -98,13 +103,10 @@ class DataController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
-    {
-        
-        $requestData = $request->all();
-        
+    {       
+        $requestData = $request->all();      
         $datum = Datum::findOrFail($id);
         $datum->update($requestData);
-
         return redirect('admin/data')->with('flash_message', 'Datum updated!');
     }
 

@@ -27,5 +27,10 @@ class Datum extends Model
      */
     protected $fillable = ['type_id', 'user_id', 'qty', 'credited', 'polished'];
 
-    
+	public function user(){
+		return $this->belongsTo('App\customer','user_id','id');
+	}
+	public function type(){
+		return $this->belongsTo('App\Grain','type_id','id');
+	}
 }

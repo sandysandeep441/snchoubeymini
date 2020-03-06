@@ -1,13 +1,13 @@
 <div class="form-group {{ $errors->has('type_id') ? 'has-error' : ''}}">
     {!! Form::label('type_id', 'Type Id', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('type_id', json_decode('{"1":"basmati","2":"nati"}', true), null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+        {!! Form::select('type_id', $grainsType, null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
         {!! $errors->first('type_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('user_id') ? 'has-error' : ''}}">
     {!! Form::label('user_id', 'User Id', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('user_id', json_decode('{"1":"sandeep","2":"manoj"}', true), null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+        {!! Form::select('user_id', $customer, null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
         {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('qty') ? 'has-error' : ''}}">

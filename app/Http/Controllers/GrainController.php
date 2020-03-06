@@ -27,7 +27,6 @@ class GrainController  extends Controller
         } else {
             $grains = Grain::paginate($perPage);
         }
-
         return view('admin.data.index', compact('grains'));
     }
 

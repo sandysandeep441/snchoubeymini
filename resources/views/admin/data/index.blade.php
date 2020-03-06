@@ -33,10 +33,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($data as $item)
+                                @foreach($grains as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->type_id }}</td><td>{{ $item->user_id }}</td><td>{{ $item->qty }}</td>
+                                        <td>{{ $item->type->name }}</td>
+										<td>{{ $item->user->name}}</td>
+										<td>{{ $item->qty }}</td>
                                         <td>
                                             <a href="{{ url('/admin/data/' . $item->id) }}" title="View Datum"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/data/' . $item->id . '/edit') }}" title="Edit Datum"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
@@ -57,7 +59,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $data->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $grains->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>
